@@ -8,7 +8,7 @@ class RomanSolver {
     String RomanToArabian(String romanStr) {
         int result = 0;
         int previousValue = 0;
-        int currentValue = 0;
+        int currentValue;
 
         int i = romanStr.length() - 1;
         while (i > -1) {
@@ -52,7 +52,7 @@ class RomanSolver {
     }
 
     boolean checkDigitType(String[] exp) {
-        return checkRomanNumberInExpression(exp[0]);
+        return checkRomanNumberInExpression(exp[0]) && checkRomanNumberInExpression(exp[2]);
     }
     String numeralTypeConverter(String[] exp) {
         if (checkRomanNumberInExpression(exp[0]) && checkRomanNumberInExpression(exp[2]))
