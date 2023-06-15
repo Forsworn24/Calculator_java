@@ -1,5 +1,4 @@
 class RomanSolver {
-
     String[] fullRomanDigits = new String[] {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
     String[] fullRomanDecimal = new String[] {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "C"};
     char[] romanNumbers = new char[] {'I', 'V', 'X', 'L', 'C'};
@@ -25,10 +24,11 @@ class RomanSolver {
 
         return String.valueOf(result);
     }
+
     int getArabianValue(char romanNumber) {
         int arabianNumber = 0;
-
         int i = 0;
+
         while (i < romanNumbers.length) {
             if (romanNumber == romanNumbers[i]) {
                 arabianNumber = arabianNumbers[i];
@@ -54,11 +54,12 @@ class RomanSolver {
     boolean checkDigitType(String[] exp) throws ScannerExceptions {
         return checkRomanNumberInExpression(exp[0]) && checkRomanNumberInExpression(exp[2]);
     }
+
     String numeralTypeConverter(String[] exp) throws ScannerExceptions {
         if (!exp[1].equals("/") && !exp[1].equals("*") && !exp[1].equals("-") && !exp[1].equals("+"))
             throw new ScannerExceptions("Неверный ввод арифметического знака, допустимые знаки: +, -, /, *.");
         else if (checkRomanNumberInExpression(exp[0]) && checkRomanNumberInExpression(exp[2]) &&
-                checkLimitValuesInRomanExpression(RomanToArabian(exp[0]), RomanToArabian(exp[2]), exp[1]))
+                    checkLimitValuesInRomanExpression(RomanToArabian(exp[0]), RomanToArabian(exp[2]), exp[1]))
             return RomanToArabian(exp[0]) + " " + exp[1] + " " + RomanToArabian(exp[2]);
         else if (checkArabianNumberInExpression(exp[0]) && checkArabianNumberInExpression(exp[2]))
             return exp[0] + " " + exp[1] + " " + exp[2];
@@ -69,18 +70,23 @@ class RomanSolver {
 
     boolean checkLimitValuesInRomanExpression(String a, String b, String sign) throws ScannerExceptions {
         if (Integer.parseInt(a) < 1 || Integer.parseInt(b) > 10)
-            throw new ScannerExceptions("Числа должны быть от I до X включительно в римской системе счисления.");
+            throw new ScannerExceptions("Числа должны быть от I до X включительно " +
+                    "в римской системе счисления.");
         else if ((sign.equals("-") && ((Integer.parseInt(a) - Integer.parseInt(b)) < 1)) ||
                     (sign.equals("/") && ((Integer.parseInt(a) / Integer.parseInt(b)) < 1)))
-            throw new ScannerExceptions("Результат арифметического выражения в римских числах должен быть положительным");
+            throw new ScannerExceptions("Результат арифметического выражения " +
+                    "в римских числах должен быть положительным.");
         else
             return true;
     }
+
     boolean checkArabianNumberInExpression(String number) throws ScannerExceptions {
         if (Integer.parseInt(number) < 1 || Integer.parseInt(number) > 10)
-            throw new ScannerExceptions("Числа должны быть от 1 до 10 включительно в арабской системе счисления.");
+            throw new ScannerExceptions("Числа должны быть от 1 до 10 включительно " +
+                    "в арабской системе счисления.");
         return true;
     }
+
     boolean checkRomanNumberInExpression(String number) throws ScannerExceptions {
         int i = 0;
         boolean isRoman = false;
@@ -92,7 +98,8 @@ class RomanSolver {
             i++;
         }
         if (!isRoman)
-            throw new ScannerExceptions("Числа должны быть от I до X включительно в римской системе счисления.");
+            throw new ScannerExceptions("Числа должны быть от I до X включительно " +
+                    "в римской системе счисления.");
         return true;
     }
 }

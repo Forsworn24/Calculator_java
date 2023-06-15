@@ -14,5 +14,4 @@ class Calculator {
 
         return res;
     }
-
 }
