@@ -51,7 +51,7 @@ class RomanSolver {
         return romanNumberRule(arabianNumber / 10, 10) + romanNumberRule(arabianNumber % 10, 1);
     }
 
-    boolean checkDigitType(String[] exp) throws ScannerExceptions {
+    boolean checkDigitType(String[] exp) {
         return checkRomanNumberInExpression(exp[0]) && checkRomanNumberInExpression(exp[2]);
     }
 
@@ -65,7 +65,8 @@ class RomanSolver {
             return exp[0] + " " + exp[1] + " " + exp[2];
         else
             throw new ScannerExceptions("Неверный формат чисел - " +
-                    "два числа должны быть одновременно либо римскими, либо арабскими.");
+                    "два числа должны быть одновременно либо римскими(от 1 до 10 включительно), " +
+                    "либо арабскими(от I до X включительно).");
     }
 
     boolean checkLimitValuesInRomanExpression(String a, String b, String sign) throws ScannerExceptions {
@@ -80,26 +81,23 @@ class RomanSolver {
             return true;
     }
 
-    boolean checkArabianNumberInExpression(String number) throws ScannerExceptions {
-        if (Integer.parseInt(number) < 1 || Integer.parseInt(number) > 10)
-            throw new ScannerExceptions("Числа должны быть от 1 до 10 включительно " +
-                    "в арабской системе счисления.");
-        return true;
+    boolean checkArabianNumberInExpression(String number) {
+        try {
+            return Integer.parseInt(number) >= 1 && Integer.parseInt(number) <= 10;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
-    boolean checkRomanNumberInExpression(String number) throws ScannerExceptions {
+    boolean checkRomanNumberInExpression(String number) {
         int i = 0;
-        boolean isRoman = false;
+
         while (i < fullRomanDigits.length) {
-            if (number.equals(fullRomanDigits[i]) && !number.equals("")) {
-                isRoman = true;
-                break;
-            }
+            if (number.equals(fullRomanDigits[i]) && !number.equals(""))
+                return true;
             i++;
         }
-        if (!isRoman)
-            throw new ScannerExceptions("Числа должны быть от I до X включительно " +
-                    "в римской системе счисления.");
-        return true;
+
+        return false;
     }
 }

@@ -26,7 +26,6 @@ public class Main {
             throw new ScannerExceptions("Неверно введено арифметическое выражение.");
 
         convertedExpression = rs.numeralTypeConverter(expression);
-
         result = calc.calculate(convertedExpression);
 
         if (rs.checkDigitType(expression))
