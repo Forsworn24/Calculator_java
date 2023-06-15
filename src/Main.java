@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws ScannerExceptions {
+    public static void main(String[] args) {
 //        Алгоритм:
 //        1. Получаем строку на вход
 //        2. Проверяем валидность строки
@@ -16,7 +16,11 @@ public class Main {
         System.out.println("Введите строку с арифметическим выражением:");
         inputExpression = scanner.nextLine();
 
-        System.out.println(calc(inputExpression));
+        try {
+            System.out.println(calc(inputExpression));
+        } catch (ScannerExceptions sc) {
+            System.out.println(sc.getMessage());
+        }
     }
 
     public static String calc(String input) throws ScannerExceptions {
@@ -27,7 +31,7 @@ public class Main {
         String[] expression = input.split(" ");
 
         if (expression.length != 3)
-            throw new ScannerExceptions("Неверно введено арифметическое выражение");
+            throw new ScannerExceptions("Неверно введено арифметическое выражение.");
 
         convertedExpression = rs.numeralTypeConverter(expression);
 
